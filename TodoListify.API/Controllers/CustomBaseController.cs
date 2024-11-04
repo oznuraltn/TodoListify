@@ -8,6 +8,7 @@ namespace TodoListify.API.Controllers;
 [ApiController]
 public class CustomBaseController : ControllerBase
 {
+    [NonAction]
     public string GetUserId()
     {
         return HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value;

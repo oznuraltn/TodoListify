@@ -16,9 +16,9 @@ public class JwtService : IJwtService
     private readonly TokenOption _tokenOption;
     private readonly UserManager<User> _userManager;
 
-    public JwtService(TokenOption tokenOption, UserManager<User> userManager)
+    public JwtService(IOptions<TokenOption> tokenOption, UserManager<User> userManager)
     {
-        _tokenOption = tokenOption;
+        _tokenOption = tokenOption.Value;
         _userManager = userManager;
     }
 

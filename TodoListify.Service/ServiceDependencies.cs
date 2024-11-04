@@ -18,6 +18,7 @@ public static class ServiceDependencies
         services.AddScoped<TodoBusinessRules>();
         services.AddScoped<UserBusinessRules>();
         services.AddScoped<CategoryBusinessRules>();
+        services.AddScoped<ICategoryService, CategoryService>();
         services.AddScoped<IJwtService, JwtService>();
         services.AddScoped<IAuthenticationService, AuthenticationService>();
         services.AddScoped<IUserService, UserService>();

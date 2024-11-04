@@ -28,7 +28,7 @@ public class EfRepositoryBase<TContext, TEntity, TId> : IRepository<TEntity, TId
 
     public List<TEntity> GetAll()
     {
-        throw new NotImplementedException();
+        return Context.Set<TEntity>().ToList(); 
     }
 
     public TEntity? GetById(TId id)

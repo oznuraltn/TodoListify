@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using TodoListify.API.Middlewares;
 using TodoListify.DataAccess;
 using TodoListify.DataAccess.Abstracts;
@@ -15,8 +16,6 @@ using TodoListify.Service.Abstracts;
 using TodoListify.Service.Concretes;
 using TodoListify.Service.Profiles;
 using TodoListify.Service.Rules;
-using AuthenticationService = Microsoft.AspNetCore.Authentication.AuthenticationService;
-using IAuthenticationService = Microsoft.AspNetCore.Authentication.IAuthenticationService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,29 +24,25 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 builder.Services.AddControllers();
-builder.Services.AddDbContext<BaseDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection")));
+
 builder.Services.AddAutoMapper(typeof(MappingProfiles));
 
 builder.Services.AddScoped<TodoBusinessRules>();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
 
-builder.Services.AddScoped<ICategoryRepository, EfCategoryRepository>();
-builder.Services.AddScoped<ICategoryService, CategoryService>();
 
-builder.Services.AddScoped<ITodoRepository, EfTodoRepository>();
-builder.Services.AddScoped<ITodoService, TodoService>();
+
 
 builder.Services.AddDataAccessDependencies(builder.Configuration);
 builder.Services.AddServiceDependencies();
 
 
-builder.Services.AddScoped<IJwtService, JwtService>();
-builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+
 builder.Services.AddScoped<DecoderService>();
 builder.Services.AddHttpContextAccessor();
 
-builder.Services.Configure<TokenOptions>(builder.Configuration.GetSection("TokenOptions"));
+builder.Services.Configure<TokenOption>(builder.Configuration.GetSection("TokenOptions"));
 
 builder.Services.AddScoped<IUserService, UserService>();
 
@@ -79,6 +74,7 @@ builder.Services.AddAuthentication(opt =>
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 
 var app = builder.Build();
 
