@@ -31,12 +31,8 @@ builder.Services.AddScoped<TodoBusinessRules>();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
 
-
-
-
 builder.Services.AddDataAccessDependencies(builder.Configuration);
 builder.Services.AddServiceDependencies();
-
 
 
 builder.Services.AddScoped<DecoderService>();

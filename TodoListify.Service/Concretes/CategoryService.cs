@@ -9,7 +9,7 @@ using TodoListify.Models.Entities;
 using TodoListify.Service.Abstracts;
 using TodoListify.Service.Rules;
 
-namespace TodoListify.Service.Concretes;
+namespace TodoListify.Service.Concretes; 
 
 public class CategoryService : ICategoryService
 {
